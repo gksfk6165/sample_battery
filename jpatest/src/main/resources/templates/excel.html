@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<th:block th:replace="common/commonHead"></th:block>
+<title>Calce Battery</title>
+</head>
+<body>
+	<nav class="navbar navbar-white bg-white"
+		th:include="common/header :: header_nav"></nav>
+		<div class="col-12 calce_background" 
+		th:style="'background: url(/img/calce.png) no-repeat '">
+		<!--width height 주자 -->
+	</div>
+	<form id="form1" name="form1" action="/org/battery/search" method="GET">
+		<div class="container container_calce_battery col-12">
+			<div class="row">
+
+				<div class="col-xl-2 col-md-4">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="group_code_select">group_code</label>
+						</div>
+						<select class="custom-select" id="group_code_select"
+							name="groupcode">
+							<option value="" selected disabled hidden>--선택하세요--</option>
+							<option value="01">Cyclindrical_Cells</option>
+							<option value="02">Prismatic_Cells</option>
+							<option value="03">Pouch_Cells</option>
+							<option value="04">Other_Cells</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xl-2 col-md-4">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="sample_code_select">sample_code</label>
+						</div>
+						<select class="custom-select" id="sample_code_select"
+							disabled="disabled" name="samplecode">
+						</select>
+					</div>
+				</div>
+				<div class="col-xl-2 col-md-4">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="depth1_select">depth1</label>
+						</div>
+						<select class="custom-select" id="depth1_select"
+							disabled="disabled" name="depth1">
+						</select>
+					</div>
+				</div>
+				<div class="col-xl-2 col-md-4">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="depth2_select">depth2</label>
+						</div>
+						<select class="custom-select" id="depth2_select"
+							disabled="disabled" name="depth2">
+						</select>
+					</div>
+				</div>
+				<div class="col-xl-2 col-md-4">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="depth3_select">depth3</label>
+						</div>
+						<select class="custom-select" id="depth3_select"
+							disabled="disabled" name="depth3">
+						</select>
+					</div>
+				</div>
+				<div class="col-xl-2 col-md-4">
+					<button type="button" class="btn btn-outline-secondary  data_search">검색</button>
+					
+					<input type="hidden" id="groupcode_value" th:value="${value_list.groupcode}">
+					<input type="hidden" id="samplevalue" th:value="${value_list.samplecode}">
+					<input type="hidden" id="depth1_value" th:value="${value_list.depth1}">
+					<input type="hidden" id="depth2_value" th:value="${value_list.depth2}">
+					<input type="hidden" id="depth3_value" th:value="${value_list.depth3}">
+				</div>
+
+			</div>
+	</form>
+			<div class="row section_table">
+			<div class="col-12 select_row">
+				<select class="selectpicker" id="selectPageSize">
+					<option th:value="10" th:selected="${value_list.size == 10}">10</option>
+					<option th:value="25" th:selected="${value_list.size == 25}">25</option>
+					<option th:value="50" th:selected="${value_list.size == 50}">50</option>
+				</select>
+			</div>
+				<div class="col-10 sample_data_table">
+					<table class="table">
+						<tr class="d-flex">
+							<th class="col-1" scope="col">번호</th>
+							<th class="col-1" scope="col">group_code</th>
+							<th class="col-1" scope="col">sample_code</th>
+							<th class="col-1" scope="col">depth1</th>
+							<th class="col-2" scope="col">depth2</th>
+							<th class="col-2" scope="col">depth3</th>
+							<th class="col-2 " scope="col">sample_file_name</th>
+							<th class="col-1" scope="col">download</th>
+							<th class="col-1" scope="col">download</th>
+							
+						</tr>
+						<!-- <tr th:each="excel : ${cell}"> -->
+						<tr th:each="excel,index : ${cell}" class="cellsampletype d-flex" value="11">
+							<td  th:text="${(index.index+1)+(number)*(value_list.size)}" class="col-1"></td>
+							<td  th:text="${excel.cellGroupVo.name}"  class="col-1"></td>
+							<td  th:text="${excel.cellSampleVo.name}" class="col-1"></td>
+							<td  th:text="${excel.depth1}" class="col-1"></td>
+							<td  th:text="${excel.depth2}" class="col-2"></td>
+							<td  th:text="${excel.depth3}" class="col-2"></td>
+							<td  th:text="${excel.sample_file_name}" class="col-2 sample_file_name"></td>
+							<td class="col-1">
+								<a th:href="@{/org/downloadSampleData?type_seq=}+${excel.seq}+@{&filename=}+${excel.sample_file_name}">
+									<img th:src="@{/img/download.png}"  width="30px">
+								</a>
+							</td>
+							<td class="col-1">
+							<form id="form2" name="form2" action="/org/downloadSampleData" method="GET" onsubmit="test()">
+									<input type="hidden" name="type_seq" class="type_seq" th:value="${excel.seq}"/>
+									<input type="hidden" name="file_name" class="file_name" th:value="${excel.sample_file_name}"/>
+									<img th:src="@{/img/download.png}" class="download_image" width="30px">
+							</form>
+							</td>
+						</tr>
+					</table>
+
+					<th:block th:if="${searchcheck == 0}">
+						<div aria-label="Page navigation example"
+							class="page-num page-button"
+							th:with="start=${(number/maxPage)*maxPage + 1},
+                  end=(${(cell.totalPages == 0) ? 1 : (start + (maxPage - 1) < cell.totalPages ? start + (maxPage - 1) : cell.totalPages)})">
+							<ul class="pagination">
+								<li th:if="${start > 1}" class="page-item"><a
+									class="page-link"
+									th:href="@{battery(page=0,size=${cell.size})}"
+									th:text="'<<'"></a></li>
+								</li>
+
+								<li th:if="${start > 1}" class="page-item"><a
+									th:href="@{battery(page=${start - maxPage-1},size=${cell.size})}"
+									th:text="'<'" class="page-link"></a></li>
+
+
+								<li th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${number+1} == ${page} ? active"
+									class="page-item"><a
+									th:href="@{battery(page=${page-1},size=${cell.size})}"
+									th:text="${page}" class="page-link"></a></li>
+								</li>
+
+								<li th:if="${end < cell.totalPages}" class="page-item"><a
+									th:href="@{battery(page=${start + maxPage-1},size=${cell.size})}"
+									th:text="'>'" class="page-link"></a></li>
+
+								<li th:if="${end < cell.totalPages}" class="page-item"><a
+									th:href="@{battery(page=${cell.totalPages-1},size=${cell.size})}"
+									th:text="'>>'" class="page-link"></a></li>
+								</li>
+							</ul>
+						</div>
+					</th:block>
+					<th:block th:if="${searchcheck==1}">
+						<div aria-label="Page navigation example"
+							class="page-num page-button"
+							th:with="start=${(number/maxPage)*maxPage + 1},
+                  end=(${(cell.totalPages == 0) ? 1 : (start + (maxPage - 1) < cell.totalPages ? start + (maxPage - 1) : cell.totalPages)})">
+							<ul class="pagination">
+								<li th:if="${start > 1}" class="page-item"><a
+									class="page-link"
+									th:href="@{search(page=0,size=${cell.size},groupcode=${value_list.groupcode},samplecode=${value_list.samplecode},depth1=${value_list.depth1},depth2=${value_list.depth2},depth3=${value_list.depth3})}"
+									th:text="'<<'"></a></li>
+								</li>
+
+								<li th:if="${start > 1}" class="page-item"><a
+									th:href="@{search(page=${start - maxPage-1},size=${cell.size},groupcode=${value_list.groupcode},samplecode=${value_list.samplecode},depth1=${value_list.depth1},depth2=${value_list.depth2},depth3=${value_list.depth3})}"
+									th:text="'<'" class="page-link"></a></li>
+
+
+								<li th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${number+1} == ${page} ? active"
+									class="page-item" ><a
+									th:href="@{search(page=${page-1},size=${cell.size},groupcode=${value_list.groupcode},samplecode=${value_list.samplecode},depth1=${value_list.depth1},depth2=${value_list.depth2},depth3=${value_list.depth3})}"
+									th:text="${page}" class="page-link"></a></li>
+								</li>
+
+								<li th:if="${end < cell.totalPages}" class="page-item"><a
+									th:href="@{search(page=${start + maxPage-1},size=${cell.size},groupcode=${value_list.groupcode},samplecode=${value_list.samplecode},depth1=${value_list.depth1},depth2=${value_list.depth2},depth3=${value_list.depth3})}"
+									th:text="'>'" class="page-link"></a></li>
+
+								<li th:if="${end < cell.totalPages}" class="page-item"><a
+									th:href="@{search(page=${cell.totalPages-1},size=${cell.size},groupcode=${value_list.groupcode},samplecode=${value_list.samplecode},depth1=${value_list.depth1},depth2=${value_list.depth2},depth3=${value_list.depth3})}"
+									th:text="'>>'" class="page-link"></a></li>
+								</li>
+							</ul>
+						</div>
+
+					</th:block>
+
+
+				</div>
+			</div>
+		</div>
+
+	<div class="loading_image">
+	  <img th:src="@{/img/img.gif}"/>
+	</div>
+</body>
+<script src="/js/cell.js"></script>
+</html>

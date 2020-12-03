@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+<title>Cell Data</title>
+</head>
+<body>
+	<table class="">
+		<tr>
+			<th>seq</th>
+			<th>type_seq</th>
+			<th>data_point</th>
+			<th>test_time</th>
+			<th>date_time</th>
+			<th>step_time</th>
+			<th>step_index</th>
+			<th>cycle_index</th>
+			<th>current</th>
+			<th>voltage</th>
+			<th>charge_capacity</th>
+			<th>discharge_capacity</th>
+			<th>charge_energy</th>
+			<th>discharge_energy</th>
+			<th>dv_dt</th>
+			<th>internal_resistance</th>
+			<th>is_fc_data</th>
+			<th>ac_impedance</th>
+			<th>aci_phase_angle</th>
+			<th>temperature_1</th>
+			<th>temperature_2</th>
+		</tr>
+		<tr th:each="excel : ${cell}">
+			<td th:text="${excel.seq}"></td>
+			<td th:text="${excel.type_seq}"></td>
+			<td th:text="${excel.data_point}"></td>
+			<td th:text="${excel.test_time}"></td>
+			<td th:text="${excel.date_time}"></td>
+			<td th:text="${excel.step_time}"></td>
+			<td th:text="${excel.step_index}"></td>
+			<td th:text="${excel.cycle_index}"></td>
+			<td th:text="${excel.current}"></td>
+			<td th:text="${excel.voltage}"></td>
+			<td th:text="${excel.charge_capacity}"></td>
+			<td th:text="${excel.discharge_energy}"></td>
+			<td th:text="${excel.dv_dt}"></td>
+			<td th:text="${excel.internal_resistance}"></td>
+			<td th:text="${excel.is_fc_data}"></td>
+			<td th:text="${excel.ac_impedance}"></td>
+			<td th:text="${excel.aci_phase_angle}"></td>
+			<td th:text="${excel.temperature_1}"></td>
+			<td th:text="${excel.temperature_2}"></td>
+		</tr>
+	</table>
+
+
+	<div aria-label="Page navigation example" class="page-num"
+		th:with="start=${(number/maxPage)*maxPage + 1},
+                  end=(${(cell.totalPages == 0) ? 1 : (start + (maxPage - 1) < cell.totalPages ? start + (maxPage - 1) : cell.totalPages)})">
+		<ul class="pagination">
+			<li th:if="${start > 1}" class="page-item"><a class="page-link" th:href="@{battery/data(page=0)}"
+				th:text="'<<'"></a></li>
+			</li>
+
+			<li th:if="${start > 1}" class="page-item"><a
+				th:href="@{battery/data(page=${start - maxPage})}" th:text="'<'" class="page-link"></a></li>
+
+
+			<li th:each="page: ${#numbers.sequence(start, end)}" class="page-item"><a
+				th:href="@{battery/data(page=${page-1})}" th:text="${page}" class="page-link"></a></li>
+			</li>
+
+			<li th:if="${end < cell.totalPages}" class="page-item"><a
+				th:href="@{battery/data(page=${start + maxPage})}" th:text="'>'" class="page-link"></a></li>
+
+			<li th:if="${end < cell.totalPages}" class="page-item"><a
+				th:href="@{battery/data(page=${cell.totalPages-1})}" th:text="'>>'" class="page-link"></a></li>
+			</li>
+		</ul>
+
+	</div>
+
+
+</body>
+</html>

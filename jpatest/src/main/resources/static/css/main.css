@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+/* main nav 좌우 margin : 0  */
+.main_img {
+	text-align: right;
+}
+
+/* 백그라운드 사진  */
+.orange-background {
+	height: 400px;
+}
+
+.header_title {
+	font-family: Georgia, "Malgun Gothic", serif;
+	font-weight: bold;
+	text-align: right;
+}
+
+@media screen and (max-width:560px) {
+	.main_img {
+		text-align: center !important;
+	}
+	.header_title {
+	    margin-top:20px;
+		text-align: center !important;
+		font-size:20px !important;
+	}
+	
+}
+

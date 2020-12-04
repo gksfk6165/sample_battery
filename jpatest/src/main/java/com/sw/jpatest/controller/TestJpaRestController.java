@@ -109,7 +109,7 @@ public class TestJpaRestController {
 	@GetMapping("/downloadSampleData")
 	public String downloadSampleData(Model model,
 			@RequestParam("type_seq") int type_seq,
-			@RequestParam("file_name") String filename) {
+			@RequestParam("filename") String filename) {
 		long startTime = System.currentTimeMillis();
 		System.out.println("list 찾는다.");
 		List<CellDataVo> list = cellDataService.findAllData(type_seq);

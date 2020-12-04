@@ -71,3 +71,7 @@
 	left:50%;
 	display:none;
 }
+
+.download_image:hover{
+	cursor: pointer;
+}

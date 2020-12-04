@@ -103,11 +103,10 @@
 							<th class="col-2" scope="col">depth3</th>
 							<th class="col-2 " scope="col">sample_file_name</th>
 							<th class="col-1" scope="col">download</th>
-							<th class="col-1" scope="col">download</th>
 							
 						</tr>
 						<!-- <tr th:each="excel : ${cell}"> -->
-						<tr th:each="excel,index : ${cell}" class="cellsampletype d-flex" value="11">
+						<tr th:each="excel,index : ${cell}" class="cellsampletype d-flex" >
 							<td  th:text="${(index.index+1)+(number)*(value_list.size)}" class="col-1"></td>
 							<td  th:text="${excel.cellGroupVo.name}"  class="col-1"></td>
 							<td  th:text="${excel.cellSampleVo.name}" class="col-1"></td>
@@ -116,16 +115,9 @@
 							<td  th:text="${excel.depth3}" class="col-2"></td>
 							<td  th:text="${excel.sample_file_name}" class="col-2 sample_file_name"></td>
 							<td class="col-1">
-								<a th:href="@{/org/downloadSampleData?type_seq=}+${excel.seq}+@{&filename=}+${excel.sample_file_name}">
-									<img th:src="@{/img/download.png}"  width="30px">
-								</a>
-							</td>
-							<td class="col-1">
-							<form id="form2" name="form2" action="/org/downloadSampleData" method="GET" onsubmit="test()">
-									<input type="hidden" name="type_seq" class="type_seq" th:value="${excel.seq}"/>
-									<input type="hidden" name="file_name" class="file_name" th:value="${excel.sample_file_name}"/>
-									<img th:src="@{/img/download.png}" class="download_image" width="30px">
-							</form>
+							<input type="hidden" class="type_seq" name="type_seq" th:value="${excel.sample_file_name}">
+							<input type="hidden" class="file_name" name="file_name" th:value="${excel.seq}">
+									<img  th:src="@{/img/download.png}" th:onclick="downloadchk([[${excel.seq}]],[[${excel.sample_file_name}]])"  width="30px">
 							</td>
 						</tr>
 					</table>

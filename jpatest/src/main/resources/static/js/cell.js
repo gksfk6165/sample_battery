@@ -314,21 +314,32 @@ function selectchange4(Item){
 //data submit
 
 $(".data_search").on('click',function(){
-	$("#form1").submit();
+	$("#form1").submit();swal
 })
 
 
-//download ajax loading
+//download 확인 작업
 
-$(document).on('click','.download_image',function(){
-	var type_seq =$(this).parent('td').children('.type_seq').val();
-	var file_name =$(this).parent('td').children('.file_name').val();
+function downloadchk(type_seq,file_name){
 	
-	$('#form2').submit();
+	swal({
+  title: "Excel 다운로드",
+  text: "",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
 })
+.then((willDelete) => {
+  if (willDelete) {
+    swal("성공", {
+      icon: "success",
+      //사용자가 다운로드를 받고 싶다고 버튼 클릭시 다운로드 시작
 
-
-function test(){
-	//$('.loading_image').show();	
+    });
+	location.href="/org/downloadSampleData?type_seq="+type_seq+"&filename="+file_name;
+  } else {
+    swal("취소");
+  }
+});
 }
 

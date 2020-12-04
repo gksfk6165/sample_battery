@@ -1,4 +1,4 @@
-package com.sw.jpatest.repository;
+package com.org.sb.repository;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.sw.jpatest.vo.CellSampleTypeVo;
+import com.org.sb.vo.CellSampleTypeVo;
 
 @Repository
 public interface CellSampleTypeRepository extends JpaRepository<CellSampleTypeVo , Long> {

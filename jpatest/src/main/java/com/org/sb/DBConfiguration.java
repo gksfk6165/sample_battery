@@ -1,4 +1,4 @@
-package com.sw.jpatest;
+package com.org.sb;
 
 import javax.sql.DataSource;
 

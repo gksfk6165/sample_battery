@@ -1,11 +1,11 @@
-package com.sw.jpatest.repository;
+package com.org.sb.repository;
 
 import java.util.List;
 
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.sw.jpatest.vo.CellDataVo;
+import com.org.sb.vo.CellDataVo;
 
 public interface CellDataRepository extends JpaRepository<CellDataVo, Long> {
 

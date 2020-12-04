@@ -1,4 +1,4 @@
-package com.sw.jpatest.service;
+package com.org.sb.service;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,9 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import com.sw.jpatest.repository.CellDataRepository;
-import com.sw.jpatest.repository.DataSpecs;
-import com.sw.jpatest.vo.CellDataVo;
+import com.org.sb.repository.CellDataRepository;
+import com.org.sb.repository.DataSpecs;
+import com.org.sb.vo.CellDataVo;
 
 @Service
 public class CellDataService {
@@ -25,7 +25,6 @@ public class CellDataService {
 	CellDataRepository cellDataRepository;
 	
 	public List<CellDataVo> findAllData(int type_seq){
-		System.out.println("service 들어와서 시작");
 		Specification<CellDataVo> spec = Specification.where(DataSpecs.bytypeseq(type_seq));
 		return cellDataRepository.findAll(spec);
 	}
@@ -122,10 +121,8 @@ public class CellDataService {
             
             if(i%5000 == 0 ) {
             	try {
-            		System.out.println("//컷//");
 					((SXSSFSheet)sheet).flushRows(5000);
 				} catch (IOException e) {
-					System.out.println("실패실패");
 					
 				}
             }

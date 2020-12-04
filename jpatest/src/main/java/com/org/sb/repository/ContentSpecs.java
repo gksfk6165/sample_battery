@@ -1,4 +1,4 @@
-package com.sw.jpatest.repository;
+package com.org.sb.repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -9,9 +9,9 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import com.sw.jpatest.vo.CellGroupVo;
-import com.sw.jpatest.vo.CellSampleTypeVo;
-import com.sw.jpatest.vo.CellSampleVo;
+import com.org.sb.vo.CellGroupVo;
+import com.org.sb.vo.CellSampleTypeVo;
+import com.org.sb.vo.CellSampleVo;
 
 public class ContentSpecs {
 

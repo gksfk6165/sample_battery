@@ -1,4 +1,4 @@
-package com.sw.jpatest.controller;
+package com.org.sb.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.sw.jpatest.service.CellDataService;
-import com.sw.jpatest.service.CellSampleTypeService;
-import com.sw.jpatest.vo.CellDataVo;
-import com.sw.jpatest.vo.CellSampleTypeVo;
+import com.org.sb.service.CellDataService;
+import com.org.sb.service.CellSampleTypeService;
+import com.org.sb.vo.CellDataVo;
+import com.org.sb.vo.CellSampleTypeVo;
 
 @Controller
 @RequestMapping("/org")
-public class TestJpaRestController {
+public class SampleBatteryController {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -110,22 +110,8 @@ public class TestJpaRestController {
 	public String downloadSampleData(Model model,
 			@RequestParam("type_seq") int type_seq,
 			@RequestParam("filename") String filename) {
-		long startTime = System.currentTimeMillis();
-		System.out.println("list 찾는다.");
 		List<CellDataVo> list = cellDataService.findAllData(type_seq);
-		
-		long endTime = System.currentTimeMillis();
-		
-		long lTime = endTime - startTime;
-		System.out.println(" 1 TIME : " + lTime + "(ms)");
-
-		
-		long startTime1 = System.currentTimeMillis();
 		SXSSFWorkbook workbook = cellDataService.excelFileDownLoad(list);
-		long endTime1= System.currentTimeMillis();
-		
-		long lTime1 = endTime1 - startTime1;
-		System.out.println(" 2 TIME : " + lTime1 + "(ms)");
 		
 		model.addAttribute("locale",Locale.KOREA);
 		model.addAttribute("workbook",workbook);

@@ -1,4 +1,4 @@
-package com.sw.jpatest.controller;
+package com.org.sb.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sw.jpatest.service.CellDataService;
-import com.sw.jpatest.service.CellSampleTypeService;
-import com.sw.jpatest.vo.CellDataVo;
-import com.sw.jpatest.vo.CellSampleTypeVo;
+import com.org.sb.service.CellDataService;
+import com.org.sb.service.CellSampleTypeService;
+import com.org.sb.vo.CellDataVo;
+import com.org.sb.vo.CellSampleTypeVo;
 
 @RestController
 @RequestMapping("/org1")

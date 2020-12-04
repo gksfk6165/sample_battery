@@ -1,4 +1,4 @@
-package com.sw.jpatest;
+package com.org.sb;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

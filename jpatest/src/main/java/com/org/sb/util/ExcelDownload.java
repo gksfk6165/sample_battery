@@ -1,4 +1,4 @@
-package com.sw.jpatest.util;
+package com.org.sb.util;
 
 import java.io.OutputStream;
 import java.net.URLEncoder;

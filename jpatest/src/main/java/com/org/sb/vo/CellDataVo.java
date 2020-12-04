@@ -1,4 +1,4 @@
-package com.sw.jpatest.vo;
+package com.org.sb.vo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

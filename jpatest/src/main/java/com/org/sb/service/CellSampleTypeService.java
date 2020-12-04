@@ -1,4 +1,4 @@
-package com.sw.jpatest.service;
+package com.org.sb.service;
 
 import java.util.List;
 
@@ -9,9 +9,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import com.sw.jpatest.repository.CellSampleTypeRepository;
-import com.sw.jpatest.repository.ContentSpecs;
-import com.sw.jpatest.vo.CellSampleTypeVo;
+import com.org.sb.repository.CellSampleTypeRepository;
+import com.org.sb.repository.ContentSpecs;
+import com.org.sb.vo.CellSampleTypeVo;
 
 @Service
 public class CellSampleTypeService {

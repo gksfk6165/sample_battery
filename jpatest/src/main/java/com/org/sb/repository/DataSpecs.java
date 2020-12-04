@@ -1,4 +1,4 @@
-package com.sw.jpatest.repository;
+package com.org.sb.repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -7,7 +7,7 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import com.sw.jpatest.vo.CellDataVo;
+import com.org.sb.vo.CellDataVo;
 
 public class DataSpecs {
 
